@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <!--<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet" />-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="/lib/main.css">
+    <script type="text/javascript" src="/lib/mainJS.js"></script>
+    <script src="http://code.jquery.com/jquery.js"></script>
+</head>
+<body>
+    <style>
+        .tableLineFitter {
+            margin-left: 25%;
+            background-color: 
+            #e0e6e6;
+            border: ridge;
+        }
+        #exampleFormControlSelect1 {
+            width: auto;
+        }
+    </style>
+    
+        <div class="form-group">
+            <table class="tableLineFitter">
+                <tr>
+                    <td>
+                        <label for="fontList">Font:</label>
+                        <select id="fontList" name="fontList">
+                            <optgroup label="Fonts">
+                                <option onclick="testAjax()" value="standard" >standard</option>
+                                <option onclick="testAjax()" value="shadow">shadow</option>
+                                <option onclick="testAjax()" value="thinkertoy">thinkertoy</option>
+                            </optgroup>
+                        </select>
+                        &nbsp;
+                        <label for="colorList">TextColor:</label>
+                        <input onchange="testAjax()" type="color" id="textcolor" name="111" value="#ff0000">
+                        &nbsp;
+                        <label for="colorList">Background:</label>
+                        <input onchange="testAjax()" class="777" type="color" id="bgcolor" name="222" value="#ff0000">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="controlRowRight">
+                            <textarea name="text" id="inputText" oninput="testAjax()" style="width:440px;">Type Something</textarea>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="submit" onclick="testAjax()" value="View">
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+        
+   
+    <!--<form action="/index.html" method="POST">
+        <div class="form-group">
+            <label for="exampleFormControlSelect1">Font:</label>
+            <select name="fontList" class="form-control" id="exampleFormControlSelect1">
+                <optgroup label="Fonts">
+                    <option value="standard" >standard</option>
+                    <option value="shadow">shadow</option>
+                    <option value="thinkertoy">thinkertoy</option>
+                </optgroup>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="colorList">TextColor:</label>
+            <input type="color" name="textcolor" value="#ff0000">
+            &nbsp;
+            <label for="colorList">Background:</label>
+            <input type="color" name="bgcolor" value="#ff0000">
+        </div>
+        <div class="form-group">
+            <textarea class="form-control" id="exampleFormControlTextarea1" name="text" id="inputText" style="width:440px;">Type Something</textarea>
+        </div>
+        <div class="form-group">
+            <input type="submit" value="View">
+        </div>
+    </form>-->
+
+    
+    <div class="form-group">
+        <br id="bbrr">
+        <textarea class="form-control" name="body" rows="20" cols="200" id="art">{{printf "%s" .Body}}</textarea>
+        <br>
+        <a onclick="saveToFile" id="saveToFile" class="btn btn-primary">Save to file</a>
+    </div>
+    
+
+    
+    <script>
+        $(function() {
+          $('#saveToFile').click(function(e) {
+            var data = document.getElementById('art').value;
+            var data = 'data:application/txt;charset=utf-8,' + encodeURIComponent(data);
+            var el = e.currentTarget;
+            el.href = data;
+            el.target = '_blank';
+            el.download = 'data.txt';
+          });
+        });
+    </script>
+
+        
+    <script>
+        function testAjax() {
+            document.getElementById("art").style.color = document.getElementById("textcolor").value
+            document.getElementById("art").style.backgroundColor = document.getElementById("bgcolor").value
+            var IT = document.getElementById("inputText").value
+            var FL = document.getElementById("fontList").value
+            var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                    var str = this.responseText;
+                    var str1 = str.substring(str.indexOf('id="art">'), );
+                    var str2 = str1.substring(0, str1.indexOf('</tex'));
+                    str3 = str2.replace('id="art">', "")
+                    document.getElementById("art").innerHTML = str3;
+                }
+            };
+            xhttp.open("POST", "/?inputText="+IT+"&fontList="+FL, true);
+            xhttp.send();
+        }
+    </script>
+    
+
+</body>
+</html>

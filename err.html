@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="/lib/main.css">
+</head>
+<body>
+    <form action="/index.html" method="POST">
+        <table class="tableLineFitter">
+            <tr>
+                <td>
+                    <label for="fontList">Font:</label>
+                    <select name="fontList">
+                        <optgroup label="Fonts">
+                            <option value="standard" >standard</option>
+                            <option value="shadow">shadow</option>
+                            <option value="thinkertoy">thinkertoy</option>
+                        </optgroup>
+                    </select>
+                <!--</td>
+                <td>-->
+                    &nbsp;
+                    <label for="colorList">Color:</label>
+                    <select name="colorList">
+                        <optgroup label="Colors">
+                            <option value="Yellow" >Yellow</option>
+                            <option value="Red">Red</option>
+                            <option value="Green">Green</option>
+                        </optgroup>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="controlRowRight">
+                        <textarea name="text" id="inputText" style="width:266px;">Type Something</textarea>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="submit" value="View">
+                </td>
+            </tr>
+        </table>
+    </form>
+
+    <div><textarea id="art" name="body" rows="50%" cols="200%">{{printf "%s" .Body}}</textarea></div>
+
+    <!--<div><p>{{printf "%s" .Body}}</p></textarea></div>-->
+</body>
+</html>
